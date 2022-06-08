@@ -23,20 +23,28 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   let currentDate = new Date;
   let months, creditBody, payOfMonth, a, b;
 
-  if (typeof percent !== 'number') {
-    console.log(`Параметр процентная ставка содержит неправильное значение ${percent}`);
-  }
-  if (typeof contribution !== 'number') {
-    console.log(`Параметр сумма первоначального взноса содержит неправильное значение ${contribution}`);
-  }
-  if (typeof amount !== 'number') {
-    console.log(`Параметр сумма кредита содержит неправильное значение ${amount}`);
-  }
-  if (typeof date !== 'object' || date < currentDate) {
-    console.log(`Параметр дата окончания кредита содержит неправильное значение ${date}`);
+  
+  if (isNaN(percent)) {
+    let str = `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
+    console.log(str);
+    return str;
   }
 
-  months = (date - currentDate) / (1000 * 3600 * 24 * 30);
+  if (isNaN(contribution)) {
+    let str = `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
+    console.log(str);
+    return str;
+  }
+
+  if (isNaN(amount)) {
+    let str = `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
+    console.log(str);
+    return str;
+  }
+  
+
+  let timeDiff = Math.abs(date.getTime() - currentDate.getTime());
+  months = Math.trunc((timeDiff / (1000 * 3600 * 24 * 30)));
   creditBody = +amount - +contribution;
   payOfMonth = creditBody * (p + (p/(((1 + p)**months - 1))));
   totalAmount = payOfMonth * months;
@@ -48,3 +56,4 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
 
   return totalAmount;
 }
+
