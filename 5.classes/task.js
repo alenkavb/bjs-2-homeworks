@@ -36,38 +36,38 @@ class PrintEditionItem {
 
 class Magazine extends PrintEditionItem {
   constructor(name, releaseDate, pagesCount) {
-  super (name, releaseDate, pagesCount);
-  this.type = "magazine";
+    super(name, releaseDate, pagesCount);
+    this.type = "magazine";
   }
 }
 
 class Book extends PrintEditionItem {
   constructor(author, name, releaseDate, pagesCount) {
-    super (name, releaseDate, pagesCount);
+    super(name, releaseDate, pagesCount);
     this.type = "book";
     this.author = author;
-    }
+  }
 }
 
 class NovelBook extends Book {
   constructor(author, name, releaseDate, pagesCount) {
-    super (author, name, releaseDate, pagesCount);
+    super(author, name, releaseDate, pagesCount);
     this.type = "novel";
-    }
+  }
 }
 
 class FantasticBook extends Book {
   constructor(author, name, releaseDate, pagesCount) {
-    super (author, name, releaseDate, pagesCount);
+    super(author, name, releaseDate, pagesCount);
     this.type = "fantastic";
-    }
+  }
 }
 
 class DetectiveBook extends Book {
   constructor(...prop) {
-    super (...prop);
+    super(...prop);
     this.type = "detective";
-    }
+  }
 }
 
 // Задача №2
@@ -93,16 +93,34 @@ class Library {
   }
 
   giveBookByName(bookName) {
-    const searchedBook =this.books.find(book => book.name === bookName);
+    const searchedBook = this.books.find(book => book.name === bookName);
     if (searchedBook === undefined) {
       return null;
     } else {
-      const index = this.books.indexOf(searchedBook); 
-      console.log("++++" + index);
+      const index = this.books.indexOf(searchedBook);
       const obj = this.books.splice(index, 1);
-      console.log("====" + obj);
       return (searchedBook);
     }
   }
 }
-  
+
+//  Задача №3
+
+class Student {
+  constructor(name) {
+    this.name = name;
+    this.subjects = {};
+  }
+
+  addMark(grade, subName) {
+    if (grade <= 0 || grade > 5) {
+      return ("Ошибка, оценка должна быть числом от 1 до 5");
+    }
+
+    if (this.subjects.isEmpty()) {
+      this.subjects.subjectName = subName;
+      this.subjects.grades = [grade];
+    }
+  }
+}
+
