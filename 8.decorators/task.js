@@ -26,10 +26,12 @@ function debounceDecoratorNew(func, ms) {
   // Ваш код
   let timerId = null;
   let flag = true;
+
   return function (...args) {
     if (timerId) {
       clearTimeout(timerId);
     };
+
     if (flag) {
       func.call(this, ...args);
       flag = false;
@@ -50,7 +52,6 @@ const debounceDecorator2 = (func, ms) => {
 
     if (timerId) {
       clearTimeout(timerId);
-    } else {
     }
 
     timerId = setTimeout(() => {
